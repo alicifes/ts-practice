@@ -1,3 +1,11 @@
+/*
+ * @Author: chenyuxiang
+ * @Date: 2023-06-26 14:45:51
+ * @LastEditTime: 2023-06-26 14:45:51
+ * @LastEditors: chenyuxiang
+ * @Description:
+ */
+
 //使用type来进行命名
 type FnA = (a: number, b: number) => number;
 const c: FnA = (a, b) => {
