@@ -75,7 +75,7 @@ function isRect (x:Rect | Circle ): x is Rect {
 //2. a.kind来进行区分o
 type Center = {kind:'center',center:[number,number]}
 type Square = {kind:'square',sideLength:number}
-//如果有基本类型直接使用typeof 进行过滤  ,加上一个共有的字段
+//如果有基本类型直接使用typeof 进行过滤 ,加上一个共有的字段
 //这里的kind必须是简单类型，并且各个类型中的kind没有交集
 const f2 = (a:Center| Square) => {
     if(a.kind === 'center'){
@@ -86,3 +86,6 @@ const f2 = (a:Center| Square) => {
     }
 }
 //4.使用断言进行强制性的收缩 as
+//所有类型的联合是 unknown 因为是对类型的未知，因此需要对该类型进行收缩才能使用
+//any 什么都能用但是不能给never
+//const n2:never = any
