@@ -11,16 +11,16 @@
 // const newConfig = lodash.pick(config, ["a", "b", "c"]);
 // runTask(newConfig)
 
-//小 =》 大 属性多的兼容属性小的  本质上属性多的限制条件也多
+//小 => 大 属性多的兼容属性小的  本质上属性多的限制条件也多
 let user = {
-    name:'1',
-    age:18,
-    id:1,
-    email:'xxxx'
-}
+  name: "1",
+  age: 18,
+  id: 1,
+  email: "xxxx",
+};
 
 //类型反推，这里的typeof是ts的typeof
-type User06 = typeof user
+type User06 = typeof user;
 
 //接口都是子接口代替父接口 extends
 //interface
@@ -31,4 +31,9 @@ type User06 = typeof user
 
 //如果想要传递函数的话，使用参数要求更少的来传递给参数要求更多的，也可以在tsconfig中进行配置
 // listerEvent('click',(e: MyMouseEvent) => console.log((e as MyMouseEvent))) //从而实现断言才能使用,这里使用确切的方法,
-// MyMouseevet这里是子类型,实在不行还是可以使用any来实现
+// MyMouseEvent这里是子类型,实在不行还是可以使用any来实现
+
+//因此这里如果要使用的话，需要进行类型收紧,推荐使用unknow 》》any
+
+//这里是生成树的结构
+type JSONValue = '"string"' | string | number | { [k: string]: JSONValue } | boolean;
