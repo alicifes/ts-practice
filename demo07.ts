@@ -41,33 +41,53 @@ interface F07 {
 const f: F07 = (a, b) => {
   return a + b;
 };
-f.count = 1
+f.count = 1;
 
-const f07 = function(a:number) {
-    return a + 1
-}
+const f07 = function (a: number) {
+  return a + 1;
+};
 //先写类型再赋值(优先)
 
 //构造函数 类型谓词  instanceof
 //一个类型的判断
 type Person007 = {
-    name:string
-}
-type Animal007 = {}
+  name: string;
+};
+type Animal007 = {};
 
-function isPerson(x:Person007 | Animal007): x is Person007{
-    return 'name' in x
-}
-
-function f007 (a:Person007| Animal007) {
-    if(isPerson(a)){
-        a
-    }
+//推荐写法，类型谓词
+function isPerson(x: Person007 | Animal007): x is Person007 {
+  return "name" in x;
 }
 
-type A007 = (x:Person007 | Animal007) => x is Person007
+function f007(a: Person007 | Animal007) {
+  if (isPerson(a)) {
+    a;
+  }
+}
+
+type A007 = (x: Person007 | Animal007) => x is Person007;
 //如果要进行类型收窄的话，这里需要赋值 返回值为  x is Person007; 但是这里的数据是对不上的
 //两边一个是 x is Person007 一个是 boolean
 //const isPerson002:A007 = (x) => 'name' in x
-const isPerson002 = (x: Person007 | Animal007): x is Person007=> 'name' in x
+const isPerson002 = (x: Person007 | Animal007): x is Person007 => "name" in x;
+//函数的可选参数,这里设置isPromp为默认值
+//函数也是一个参数,传递参数不同，可执行的方法也不同
+function addEventListener(
+  listenType: string,
+  func: (this: HTMLElement, e: Event) => void,
+  isPromp = false
+) {
+  //调用this
+  //func.call()
+  console.log(listenType + func + isPromp);
+}
+
+addEventListener("click", () => {});
+
+//返回也是函数，函数柯里化.实现推断
+type Add007 = (a:number) => (b:number) => number
+const add:Add007 = (a) => (b) => a + b
+add(1)(2)
+//分别只传进去一个参数
 
